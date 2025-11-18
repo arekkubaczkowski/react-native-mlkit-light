@@ -18,6 +18,27 @@ bun add react-native-mlkit-light
 
 For iOS, run `npx pod-install` after installation.
 
+### Configuration (Optional)
+
+By default, the library is enabled on all platforms. If you need to conditionally disable iOS support (e.g., for arm64 simulators where MLKit is not supported - iOS 26 simulators run exclusively on arm64), add the plugin to your `app.config.js`:
+
+```javascript
+export default {
+  // ... other config
+  plugins: [
+    [
+      "react-native-mlkit-light",
+      {
+        enableIOS: false  // Set to false to disable iOS MLKit and use stub implementation (useful for arm64 simulators)
+      }
+    ]
+  ]
+};
+```
+
+**Plugin Options:**
+- `enableIOS` (boolean, default: `true`) - Whether to enable MLKit Face Detection on iOS. When disabled, the library will use a stub implementation that throws an error explaining MLKit is not available. Useful for arm64 simulators where MLKit is not supported.
+
 ## Usage
 
 ### Simple Import (Recommended)

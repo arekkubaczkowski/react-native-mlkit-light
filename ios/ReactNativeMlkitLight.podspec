@@ -2,6 +2,9 @@ require 'json'
 
 package = JSON.parse(File.read(File.join(__dir__, '..', 'package.json')))
 
+# Check for configuration flags
+enable_ios = ENV['MLKIT_LIGHT_ENABLE_IOS'] != 'NO'
+
 Pod::Spec.new do |s|
   s.name           = 'ReactNativeMlkitLight'
   s.version        = package['version']
@@ -19,12 +22,17 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
-  s.dependency 'GoogleMLKit/FaceDetection', '~> 6.0.0'
+  
+  # Conditionally add MLKit dependency and source files
+  if enable_ios
+    s.dependency 'GoogleMLKit/FaceDetection', '~> 6.0.0'
+    s.source_files = "ReactNativeMlkitLightModule.swift"
+  else
+    s.source_files = "ReactNativeMlkitLightModuleStub.swift"
+  end
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
   }
-
-  s.source_files = "**/*.{h,m,mm,swift,hpp,cpp}"
 end

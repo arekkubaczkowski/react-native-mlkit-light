@@ -4,6 +4,7 @@
   "description": "React Native MLKit wrapper",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "plugin": "plugin/build/index.js",
   "scripts": {
     "build": "expo-module build",
     "clean": "expo-module clean",
