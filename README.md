@@ -13,6 +13,10 @@ Lightweight React Native wrapper for Google MLKit Face Detection.
 ## Installation
 
 ```bash
+npm install react-native-mlkit-light
+# or
+yarn add react-native-mlkit-light
+# or
 bun add react-native-mlkit-light
 ```
 
