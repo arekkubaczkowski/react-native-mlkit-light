@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["ReactNativeMlkitLightModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.mlkitlight.ReactNativeMlkitLightModule"]
+  }
+}
