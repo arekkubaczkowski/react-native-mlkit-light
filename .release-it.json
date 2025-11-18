@@ -1,0 +1,19 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}",
+    "push": true
+  },
+  "github": {
+    "release": true,
+    "releaseName": "v${version}"
+  },
+  "npm": {
+    "publish": true
+  },
+  "hooks": {
+    "before:init": ["bun run lint", "bun run build"],
+    "after:bump": ["bun install --lockfile-only"],
+    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+  }
+}
