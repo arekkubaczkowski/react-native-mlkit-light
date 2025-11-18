@@ -140,7 +140,7 @@ interface FaceDetectionOptions {
 
 ## Platform Support
 
-- ✅ **iOS** - Requires iOS 12.0+
+- ✅ **iOS** - Requires iOS 15.5+
 - ✅ **Android** - Requires API level 21+
 - ❌ **Web** - Not supported
 

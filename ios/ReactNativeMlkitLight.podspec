@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, '..', 'package.json')))
 
 # Check for configuration flags
-enable_ios = ENV['MLKIT_LIGHT_ENABLE_IOS'] != 'NO'
+enable_ios = defined?(MLKIT_LIGHT_ENABLE_IOS) ? MLKIT_LIGHT_ENABLE_IOS : true
 
 Pod::Spec.new do |s|
   s.name           = 'ReactNativeMlkitLight'
@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
   s.author         = package['author']
   s.homepage       = package['homepage']
   s.platforms      = {
-    :ios => '15.1',
-    :tvos => '15.1'
+    :ios => '15.5',
+    :tvos => '15.5'
   }
   s.swift_version  = '5.9'
   s.source         = { git: 'https://github.com/arekkubaczkowski/react-native-mlkit-light' }
