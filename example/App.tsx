@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactNativeMlkitLight, { DetectionResult, FaceDetectionOptions } from 'react-native-mlkit-light';
+import { detectFaces, DetectionResult, FaceDetectionOptions } from 'react-native-mlkit-light';
 import { Button, SafeAreaView, ScrollView, Text, View, Alert } from 'react-native';
 
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
         trackingEnabled: false
       };
 
-      const result = await ReactNativeMlkitLight.detectFaces(imageUri, options);
+      const result = await detectFaces(imageUri, options);
       setDetectionResult(result);
       
       Alert.alert('Success', `Detected ${result.faces.length} face(s)`);

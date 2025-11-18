@@ -1,35 +1,130 @@
 # react-native-mlkit-light
 
-React Native MLKit wrapper
+Lightweight React Native wrapper for Google MLKit Face Detection.
 
-# API documentation
+## Features
 
-- [Documentation for the latest stable release](https://docs.expo.dev/versions/latest/sdk/react-native-mlkit-light/)
-- [Documentation for the main branch](https://docs.expo.dev/versions/unversioned/sdk/react-native-mlkit-light/)
+- 🔍 **Face Detection** - Detect faces in images with comprehensive data
+- 📱 **Cross Platform** - iOS and Android support  
+- ⚡ **Expo Module** - Built using Expo Modules API with new architecture support
+- 🎯 **MLKit Powered** - Uses Google's on-device ML models
+- 🌐 **Flexible Input** - Support for both local files and remote URLs
 
-# Installation in managed Expo projects
+## Installation
 
-For [managed](https://docs.expo.dev/archive/managed-vs-bare/) Expo projects, please follow the installation instructions in the [API documentation for the latest stable release](#api-documentation). If you follow the link and there is no documentation available then this library is not yet usable within managed projects &mdash; it is likely to be included in an upcoming Expo SDK release.
-
-# Installation in bare React Native projects
-
-For bare React Native projects, you must ensure that you have [installed and configured the `expo` package](https://docs.expo.dev/bare/installing-expo-modules/) before continuing.
-
-### Add the package to your npm dependencies
-
-```
-npm install react-native-mlkit-light
+```bash
+bun add react-native-mlkit-light
 ```
 
-### Configure for Android
+For iOS, run `npx pod-install` after installation.
 
+## Usage
 
+### Simple Import (Recommended)
 
+```typescript
+import { detectFaces, FaceDetectionOptions, DetectionResult } from 'react-native-mlkit-light';
 
-### Configure for iOS
+const handleFaceDetection = async () => {
+  try {
+    const options: FaceDetectionOptions = {
+      performanceMode: 'accurate',     // 'fast' | 'accurate'
+      landmarkMode: 'all',            // 'none' | 'all'  
+      classificationMode: 'all',      // 'none' | 'all'
+      minFaceSize: 0.1,               // minimum face size (0.0 - 1.0)
+      trackingEnabled: false          // enable face tracking
+    };
 
-Run `npx pod-install` after installing the npm package.
+    const result: DetectionResult = await detectFaces(
+      'https://example.com/image.jpg', // local file or URL
+      options
+    );
 
-# Contributing
+    console.log(`Found ${result.faces.length} faces`);
+    
+    result.faces.forEach((face, index) => {
+      console.log(`Face ${index + 1}:`, {
+        bounds: face.bounds,
+        smiling: face.smilingProbability,
+        leftEyeOpen: face.leftEyeOpenProbability,
+        rightEyeOpen: face.rightEyeOpenProbability,
+        landmarks: face.landmarks?.length || 0
+      });
+    });
+    
+  } catch (error) {
+    console.error('Face detection failed:', error);
+  }
+};
+```
 
-Contributions are very welcome! Please refer to guidelines described in the [contributing guide]( https://github.com/expo/expo#contributing).
+### Alternative Import Methods
+
+```typescript
+// Import specific helper functions
+import { detectFacesFromUrl, detectFacesFromFile } from 'react-native-mlkit-light';
+
+// Detect from URL
+const result1 = await detectFacesFromUrl('https://example.com/photo.jpg');
+
+// Detect from local file
+const result2 = await detectFacesFromFile('file:///path/to/image.jpg');
+
+// Import native module directly (legacy)
+import ReactNativeMlkitLight from 'react-native-mlkit-light';
+const result3 = await ReactNativeMlkitLight.detectFaces(imageUri);
+```
+
+## API
+
+### `detectFaces(imageUri: string, options?: FaceDetectionOptions): Promise<DetectionResult>`
+
+**Parameters:**
+- `imageUri` - Local file URI or HTTP/HTTPS URL to image
+- `options` - Face detection configuration (optional)
+
+**Returns:**
+- `DetectionResult` - Object containing detected faces data
+
+## Types
+
+### `Face`
+```typescript
+interface Face {
+  bounds: FaceBounds;                    // Face bounding box
+  rollAngle?: number;                    // Head rotation (Z-axis)  
+  pitchAngle?: number;                   // Head rotation (X-axis)
+  yawAngle?: number;                     // Head rotation (Y-axis)
+  leftEyeOpenProbability?: number;       // 0.0-1.0
+  rightEyeOpenProbability?: number;      // 0.0-1.0
+  smilingProbability?: number;           // 0.0-1.0
+  landmarks?: FaceLandmark[];            // Facial landmarks
+}
+```
+
+### `FaceDetectionOptions`
+```typescript
+interface FaceDetectionOptions {
+  performanceMode?: 'fast' | 'accurate'; // Detection speed vs accuracy
+  landmarkMode?: 'none' | 'all';         // Detect facial landmarks
+  classificationMode?: 'none' | 'all';   // Eye/smile classification  
+  minFaceSize?: number;                   // Min face size (0.0-1.0)
+  trackingEnabled?: boolean;              // Enable face tracking IDs
+}
+```
+
+## Platform Support
+
+- ✅ **iOS** - Requires iOS 12.0+
+- ✅ **Android** - Requires API level 21+
+- ❌ **Web** - Not supported
+
+## Dependencies
+
+Uses Google MLKit Vision APIs:
+- iOS: `GoogleMLKit/FaceDetection` 
+- Android: `com.google.mlkit:face-detection`
+
+## License
+
+MIT
