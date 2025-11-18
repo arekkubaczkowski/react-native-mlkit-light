@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   
   # Conditionally add MLKit dependency and source files
   if enable_ios
-    s.dependency 'GoogleMLKit/FaceDetection', '~> 6.0.0'
+    s.dependency 'GoogleMLKit/FaceDetection', '~> 8.0.0'
     s.source_files = "ReactNativeMlkitLightModule.swift"
   else
     s.source_files = "ReactNativeMlkitLightModuleStub.swift"
