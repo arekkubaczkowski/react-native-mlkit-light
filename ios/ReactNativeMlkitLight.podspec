@@ -2,8 +2,8 @@ require 'json'
 
 package = JSON.parse(File.read(File.join(__dir__, '..', 'package.json')))
 
-# Check for configuration flags from ENV
-enable_ios = ENV['MLKIT_LIGHT_ENABLE_IOS'] == 'true'
+# Check for configuration flags from ENV with fallback to true
+enable_ios = ENV['MLKIT_LIGHT_ENABLE_IOS'] != 'false'
 
 Pod::Spec.new do |s|
   s.name           = 'ReactNativeMlkitLight'

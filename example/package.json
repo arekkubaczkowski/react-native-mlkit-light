@@ -9,15 +9,16 @@
   },
   "dependencies": {
     "expo": "~54.0.24",
+    "expo-build-properties": "^1.0.9",
     "expo-dev-client": "~6.0.13",
     "expo-linking": "~8.0.2",
     "react": "19.1.0",
     "react-native": "0.81.5",
-    "react-native-gesture-handler": "~2.28.0",
-    "react-native-mlkit-light": "file:.."
+    "react-native-gesture-handler": "~2.28.0"
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "glob": "^10.4.2",
     "typescript": "~5.9.2"
   },
   "private": true,

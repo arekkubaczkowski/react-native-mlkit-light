@@ -33,7 +33,6 @@
   "author": "Arkadiusz Kubaczkowski <arek.kubaczkowski@gmail.com> (arekkubaczkowski)",
   "license": "MIT",
   "homepage": "https://github.com/arekkubaczkowski/react-native-mlkit-light#readme",
-  "dependencies": {},
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.1",

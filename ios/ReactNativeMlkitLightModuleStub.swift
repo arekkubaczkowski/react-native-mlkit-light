@@ -1,7 +1,7 @@
 import ExpoModulesCore
 
-// Stub implementation when MLKit is not available (e.g., on simulator)
-public class ReactNativeMlkitLightModuleStub: Module {
+// Stub implementation when MLKit is disabled
+public class ReactNativeMlkitLightModule: Module {
   public func definition() -> ModuleDefinition {
     Name("ReactNativeMlkitLight")
 
@@ -10,7 +10,7 @@ public class ReactNativeMlkitLightModuleStub: Module {
       throw NSError(
         domain: "ReactNativeMlkitLight", 
         code: 1, 
-        userInfo: [NSLocalizedDescriptionKey: "MLKit Face Detection is not available on this platform/simulator. Enable simulator support in plugin configuration or test on device."]
+        userInfo: [NSLocalizedDescriptionKey: "MLKit Face Detection is disabled. Enable it in the Expo config plugin configuration."]
       )
     }
   }

@@ -29,6 +29,14 @@ module.exports = {
     },
     plugins: [
       [
+        "expo-build-properties",
+        {
+          ios: {
+            deploymentTarget: "15.5",
+          },
+        },
+      ],
+      [
         withMLKitLight,
         {
           enableIOS: true,
